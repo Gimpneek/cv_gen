@@ -130,3 +130,23 @@ class PersonalProfile(models.Model):
     personal_statement = models.TextField(
         help_text="Personal Statement to summarise who you are"
     )
+
+
+class CV(models.Model):
+    name = models.CharField(
+        max_length=256,
+        help_text="name of CV"
+    )
+    personal_profile = models.ForeignKey(
+        PersonalProfile,
+        help_text="Personal Profile to use"
+    )
+    skills = models.ManyToManyField(Skill, help_text="Skills to use")
+    experiences = models.ManyToManyField(
+        Experience,
+        help_text="Experiences to use"
+    )
+    education = models.ManyToManyField(
+        Education,
+        help_text="Education to use"
+    )
