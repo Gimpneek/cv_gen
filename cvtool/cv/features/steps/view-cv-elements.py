@@ -1,6 +1,7 @@
 from behave import given, when, then
 from selenium.webdriver.common.by import By
-from cv.views import *
+from cv.views import SkillUpdateView, ExperienceUpdateView
+from cv.views import EducationUpdateView, ProfileUpdateView
 
 
 list_item_selector = (By.CSS_SELECTOR, '#listing a')

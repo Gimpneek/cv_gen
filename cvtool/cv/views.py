@@ -87,13 +87,15 @@ class SkillCreateView(CreateView):
 
     def get_context_data(self, **kwargs):
         """
-        Add the tags list, choices for freshness and proficiency to context so can show these
-        Tell the page that it will be an Add
+        Add the tags list, choices for freshness and proficiency to context
+        so can show these tell the page that it will be an Add
         """
         context = super(SkillCreateView, self).get_context_data(**kwargs)
         context['tags'] = Tag.objects.order_by('id')
-        context['proficiency_choices'] = context['form'].fields['proficiency'].choices
-        context['freshness_choices'] = context['form'].fields['freshness'].choices
+        context['proficiency_choices'] = \
+            context['form'].fields['proficiency'].choices
+        context['freshness_choices'] = \
+            context['form'].fields['freshness'].choices
         context['action'] = 'Add'
         return context
 
@@ -108,8 +110,9 @@ class SkillUpdateView(UpdateView):
 
     def get_context_data(self, **kwargs):
         """
-        Add the tags list, choices for proficiency and freshness lists  as well as get the active
-        tags (so no need to compute in template) and tell template its an add action
+        Add the tags list, choices for proficiency and freshness lists  as
+        well as get the active tags (so no need to compute in template) and
+        tell template its an add action
         """
         context = super(SkillUpdateView, self).get_context_data(**kwargs)
         context['tags'] = Tag.objects.order_by('id')
@@ -132,8 +135,8 @@ class ExperienceCreateView(CreateView):
 
     def get_context_data(self, **kwargs):
         """
-        Add the list of projects and responsibilities to the inputs and tell the template its an
-        add action
+        Add the list of projects and responsibilities to the inputs and tell
+        the template its an add action
         """
         context = super(ExperienceCreateView, self).get_context_data(**kwargs)
         context['projects'] = Project.objects.order_by('id')
@@ -153,15 +156,17 @@ class ExperienceUpdateView(UpdateView):
 
     def get_context_data(self, **kwargs):
         """
-        Add the list of projects and responsibilities to the context as well as calculate the
-        ones the experience is linked to and also tell teh template its an edit action
+        Add the list of projects and responsibilities to the context as well
+        as calculate the ones the experience is linked to and also tell teh
+        template its an edit action
         """
         context = super(ExperienceUpdateView, self).get_context_data(**kwargs)
         context['projects'] = Project.objects.order_by('id')
         context['responsibilities'] = Responsibility.objects.order_by('id')
         context['action'] = 'Edit'
         context['active_projects'] = context['form'].initial['projects']
-        context['active_responsibilities'] = context['form'].initial['responsibilities']
+        context['active_responsibilities'] = \
+            context['form'].initial['responsibilities']
         return context
 
 
@@ -174,7 +179,8 @@ class EducationCreateView(CreateView):
 
     def get_context_data(self, **kwargs):
         """
-        Add the list of projects and courses to teh context and tell the template its an add action
+        Add the list of projects and courses to teh context and tell the
+        template its an add action
         """
         context = super(EducationCreateView, self).get_context_data(**kwargs)
         context['projects'] = Project.objects.order_by('id')
@@ -193,8 +199,9 @@ class EducationUpdateView(UpdateView):
 
     def get_context_data(self, **kwargs):
         """
-        Add the list of projects and courses to the context, tell the template its an edit action
-        and get the active projects and courses so dont have to calculate this in template
+        Add the list of projects and courses to the context, tell the template
+        its an edit action and get the active projects and courses so dont
+        have to calculate this in template
         """
         context = super(EducationUpdateView, self).get_context_data(**kwargs)
         context['projects'] = Project.objects.order_by('id')
@@ -237,4 +244,3 @@ class ProfileUpdateView(UpdateView):
         context = super(ProfileUpdateView, self).get_context_data(**kwargs)
         context['action'] = 'Edit'
         return context
-

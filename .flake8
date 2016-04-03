@@ -1,0 +1,2 @@
+[flake8]
+exclude=cvtool/cvtool/*, cvtool/cv/migrations/*

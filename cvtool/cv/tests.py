@@ -368,4 +368,5 @@ class TestCV(TestCase):
         course = edu.courses.get(pk=1)
         self.assertEqual(course.name, "BA (Hons) Testing")
         self.assertEqual(course.mark, "First")
-        self.assertEqual(edu.projects.get(pk=2).name, "Test Driven Development")
+        self.assertEqual(edu.projects.get(pk=2).name,
+                         "Test Driven Development")

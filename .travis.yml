@@ -10,3 +10,4 @@ script:
   - python manage.py behave --tags @fixtures
   - cd ..
   - pylint --load-plugins pylint_django cvtool/cv
+  - flake8 cvtool
