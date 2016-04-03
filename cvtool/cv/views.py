@@ -55,3 +55,19 @@ def education_list(request):
             'items': education
         }
     )
+
+
+def profiles_list(request):
+    """
+    Show proflies added to the system
+    """
+    profiles = PersonalProfile.objects.order_by('id')
+    return render(
+        request,
+        'cv/listing.html',
+        {
+            'title': 'Profiles',
+            'type': 'profile',
+            'items': profiles
+        }
+    )

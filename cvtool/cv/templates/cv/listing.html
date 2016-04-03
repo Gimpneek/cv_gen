@@ -1,9 +1,9 @@
 {% extends "cv/base.html" %}
 {% block content %}
 <h1>{{ title }}</h1>
-<ul>
+<ul id="listing">
 {% for item in items %}
-    <li><a href="/{{ type }}/{{ item.id }}">{{ item.name }}</a></li>
+    <li><a href="/{{ type }}/{{ item.id }}">{{ item }}</a></li>
 {% endfor %}
 </ul>
 {% endblock %}

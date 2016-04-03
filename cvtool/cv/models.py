@@ -140,6 +140,9 @@ class PersonalProfile(models.Model):
         help_text="Personal Statement to summarise who you are"
     )
 
+    def __str__(self):
+        return self.name
+
 
 class CV(models.Model):
     name = models.CharField(

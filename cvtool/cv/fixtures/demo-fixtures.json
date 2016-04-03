@@ -1,0 +1,100 @@
+[
+  {
+	"model": "cv.skill",
+	"pk": 1,
+	"fields": {
+		"name": "Continuous Delivery",
+		"proficiency": 3,
+		"freshness": 5,
+		"tags": []
+	}
+}, {
+	"model": "cv.skill",
+	"pk": 2,
+	"fields": {
+		"name": "Continuous Integration",
+		"proficiency": 4,
+		"freshness": 4,
+		"tags": [1, 5]
+	}
+}, {
+	"model": "cv.tag",
+	"pk": 1,
+	"fields": {
+		"name": "Quality"
+	}
+}, {
+	"model": "cv.tag",
+	"pk": 2,
+	"fields": {
+		"name": "Development"
+	}
+}, {
+	"model": "cv.tag",
+	"pk": 3,
+	"fields": {
+		"name": "TDD"
+	}
+}, {
+	"model": "cv.tag",
+	"pk": 4,
+	"fields": {
+		"name": "BDD"
+	}
+}, {
+	"model": "cv.tag",
+	"pk": 5,
+	"fields": {
+		"name": "Public Sector"
+	}
+}, {
+	"model": "cv.experience",
+	"pk": 1,
+	"fields": {
+		"company": "NeovaHealth",
+		"role": "Software Development Manager",
+		"start_date": "2013-11-05",
+		"end_date": null,
+		"projects": [],
+		"responsibilities": []
+	}
+}, {
+	"model": "cv.course",
+	"pk": 1,
+	"fields": {
+		"name": "BA (Hons) Digital Arts",
+		"mark": "First Class Honours"
+	}
+}, {
+	"model": "cv.education",
+	"pk": 1,
+	"fields": {
+		"institution": "Thames Valley University",
+		"start_date": "2006-08-01",
+		"end_date": "2009-06-01",
+		"courses": [1],
+		"projects": []
+	}
+}, {
+	"model": "cv.personalprofile",
+	"pk": 1,
+	"fields": {
+		"name": "Colin Wren",
+		"email": "colin@gimpneek.com",
+		"website": "http://colinwren.is/awesome",
+		"portfolio": "https://github.com/Gimpneek",
+		"personal_statement": "Mtknsdoajsdaposmdapsomdaspodma"
+	}
+},
+  {
+	"model": "cv.cv",
+	"pk": 1,
+	"fields": {
+		"name": "Generic",
+		"personal_profile": 1,
+		"skills": [1, 2],
+		"experiences": [1],
+		"education": [1]
+	}
+  }
+]
