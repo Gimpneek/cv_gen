@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>CV Tool</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.0.17/css/bulma.min.css" rel="stylesheet"/>
+</head>
+<body>
+    <section class="section">
+        <div class="container">
+            <nav class="navbar">
+              <!-- Left side -->
+              <div class="navbar-left">
+                <div class="navbar-item">
+                  <p class="subtitle is-5">
+                    CV Tool
+                  </p>
+                </div>
+              </div>
+
+              <!-- Right side -->
+              <div class="navbar-right">
+                <p class="navbar-item"><a href="#">Logout</a></p>
+              </div>
+            </nav>
+        </div>
+    </section>
+    <section class="section">
+        <div class="container">
+            <div class="columns">
+                <div class="column is-third">
+                    <aside class="menu">
+                      <p class="menu-label">
+                        CV Elements
+                      </p>
+                      <ul class="menu-list">
+                        <li><a href="/skills">Skills</a></li>
+                        <li><a href="/experiences">Experience</a></li>
+                        <li><a href="/educations">Education</a></li>
+                        <li><a href="/profiles">Profiles</a></li>
+                      </ul>
+                      <p class="menu-label">
+                        CVs
+                      </p>
+                      <ul class="menu-list">
+                        <li><a href="#">Generated CVs</a></li>
+                      </ul>
+                    </aside>
+                </div>
+                <div class="column content">
+                    {% block content %}
+                        <h1>Welcome</h1>
+                    {% endblock %}
+                </div>
+            </div>
+        </div>
+    </section>
+    <footer>
+        <div class="container">
+            <div class="content is-text-centered">
+                <p>CV Tool by Colin Wren</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
