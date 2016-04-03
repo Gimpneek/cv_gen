@@ -1,6 +1,6 @@
 {% extends "cv/base.html" %}
 {% block content %}
-<h1>{{ title }} <a href="/{{ type }}/add/" class="button is-primary is-pulled-right">Add {{ type|title }}</a></h1>
+<h1>{{ title }} <a href="/{{ type }}/add/" class="button is-primary is-pulled-right" id="add_cv_element">Add {{ type|title }}</a></h1>
 <ul id="listing">
 {% for item in items %}
     <li><a href="/{{ type }}/{{ item.id }}">{{ item }}</a></li>

@@ -4,6 +4,7 @@ from cv.views import *
 
 
 list_item_selector = (By.CSS_SELECTOR, '#listing a')
+add_element_button_selector = (By.ID, 'add_cv_element')
 
 
 @given('I view the listing of {listing}')
@@ -48,7 +49,17 @@ def click_list_item(context, item):
     links[0].click()
 
 
+@when('I click on the "Add {item}" button')
+def click_add_element_button(context, item):
+    """
+    Click on the button to add element
+    """
+    button = context.browser.find_element(*add_element_button_selector)
+    button.click()
+
+
 @then('I should be able to edit the {item}')
+@then('I should be taken to a form to add a {item}')
 def view_edit_form(context, item):
     """
     Verify on edit form
