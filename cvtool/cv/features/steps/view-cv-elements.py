@@ -1,5 +1,6 @@
 from behave import given, when, then
 from selenium.webdriver.common.by import By
+from cv.views import *
 
 
 list_item_selector = (By.CSS_SELECTOR, '#listing a')
@@ -53,10 +54,10 @@ def view_edit_form(context, item):
     Verify on edit form
     """
     switch = {
-        'skill': ['name', 'proficiency', 'freshness', 'tags'],
-        'experience': ['company', 'role', 'start_date', 'end_date'],
-        'education': ['institution', 'start_date', 'end_date'],
-        'profile': ['name', 'email', 'website', 'porfolio', 'personal_statement']
+        'skill': SkillUpdateView.fields,
+        'experience': ExperienceUpdateView.fields,
+        'education': EducationUpdateView.fields,
+        'profile': ProfileUpdateView.fields
     }
     form_elements = switch[item]
     for form_element in form_elements:

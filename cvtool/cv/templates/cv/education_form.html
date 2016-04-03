@@ -1,0 +1,58 @@
+{% extends "cv/base.html" %}
+{% block content %}
+    <h1>{{ action }} Education</h1>
+    <form action="" method="post" id="cv_element_form">
+        {% csrf_token %}
+        <div class="control is-horizontal">
+            <div class="control-label">
+                <label class="label" for="institution">Institution</label>
+            </div>
+            <p class="control">
+                <input name="institution" class="input" type="text" value="{{ education.institution }}"/>
+            </p>
+        </div>
+        <div class="control is-horizontal">
+            <div class="control-label">
+                <label class="label" for="start_date">Start Date</label>
+            </div>
+            <p class="control">
+                <input name="start_date" class="input" type="date" value="{{ education.start_date|date:"Y-m-d" }}"/>
+            </p>
+        </div>
+        <div class="control is-horizontal">
+            <div class="control-label">
+                <label class="label" for="end_date">End Date</label>
+            </div>
+            <p class="control">
+                <input name="end_date" class="input" type="date" value="{{ education.end_date|date:"Y-m-d" }}"/>
+            </p>
+        </div>
+        <div class="control is-horizontal">
+            <div class="control-label">
+                <label class="label" for="projects">Projects</label>
+            </div>
+            <p class="control">
+                <select multiple="multiple" class="select is-fullwidth" name="projects">
+                    {% for project in projects %}
+                        <option value="{{ project.id }}" {% if project.id in active_projects %} selected="selected" {% endif %}>{{ project }}</option>
+                    {% endfor %}
+                </select>
+            </p>
+        </div>
+        <div class="control is-horizontal">
+            <div class="control-label">
+                <label class="label" for="courses">Courses</label>
+            </div>
+            <p class="control">
+                <select multiple="multiple" class="select is-fullwidth" name="courses">
+                    {% for course in courses %}
+                        <option value="{{ course.id }}" {% if course.id in active_courses %} selected="selected" {% endif %}>{{ course }}</option>
+                    {% endfor %}
+                </select>
+            </p>
+        </div>
+        <p class="control">
+            <input type="submit" value="Submit" class="button is-primary" />
+        </p>
+    </form>
+{% endblock %}

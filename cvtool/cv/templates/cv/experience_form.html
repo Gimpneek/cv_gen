@@ -1,0 +1,66 @@
+{% extends "cv/base.html" %}
+{% block content %}
+    <h1>{{ action }} Experience</h1>
+    <form action="" method="post" id="cv_element_form">
+        {% csrf_token %}
+        <div class="control is-horizontal">
+            <div class="control-label">
+                <label class="label" for="company">Company</label>
+            </div>
+            <p class="control">
+                <input name="company" class="input" type="text" value="{{ experience.company }}"/>
+            </p>
+        </div>
+        <div class="control is-horizontal">
+            <div class="control-label">
+                <label class="label" for="role">Role</label>
+            </div>
+            <p class="control">
+                <input name="role" class="input" type="text" value="{{ experience.role }}"/>
+            </p>
+        </div>
+        <div class="control is-horizontal">
+            <div class="control-label">
+                <label class="label" for="start_date">Start Date</label>
+            </div>
+            <p class="control">
+                <input name="start_date" class="input" type="date" value="{{ experience.start_date|date:"Y-m-d" }}"/>
+            </p>
+        </div>
+        <div class="control is-horizontal">
+            <div class="control-label">
+                <label class="label" for="end_date">End Date</label>
+            </div>
+            <p class="control">
+                <input name="end_date" class="input" type="date" value="{{ experience.end_date|date:"Y-m-d" }}"/>
+            </p>
+        </div>
+        <div class="control is-horizontal">
+            <div class="control-label">
+                <label class="label" for="projects">Projects</label>
+            </div>
+            <p class="control">
+                <select multiple="multiple" class="select is-fullwidth" name="projects">
+                    {% for project in projects %}
+                        <option value="{{ project.id }}" {% if project.id in active_projects %} selected="selected" {% endif %}>{{ project }}</option>
+                    {% endfor %}
+                </select>
+            </p>
+        </div>
+        <div class="control is-horizontal">
+            <div class="control-label">
+                <label class="label" for="responsibilities">Responsibilities</label>
+            </div>
+            <p class="control">
+                <select multiple="multiple" class="select is-fullwidth" name="responsibilities">
+                    {% for responsibility in responsibilities %}
+                        <option value="{{ responsibility.id }}" {% if responsibility.id in active_responsibilities %} selected="selected" {% endif %}>{{ responsibility }}</option>
+                    {% endfor %}
+                </select>
+            </p>
+        </div>
+        <p class="control">
+            <input type="submit" value="Submit" class="button is-primary" />
+        </p>
+    </form>
+{% endblock %}

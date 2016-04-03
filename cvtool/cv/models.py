@@ -1,4 +1,5 @@
 from django.db import models
+from django.core.urlresolvers import reverse
 
 
 class Skill(models.Model):
@@ -32,6 +33,9 @@ class Skill(models.Model):
 
     def __str__(self):
         return self.name
+
+    def get_absolute_url(self):
+        return reverse('skill-edit', kwargs={'pk': self.pk})
 
 
 class Tag(models.Model):
@@ -87,6 +91,9 @@ class Experience(models.Model):
     def __str__(self):
         return "{0} - {1}".format(self.role, self.company)
 
+    def get_absolute_url(self):
+        return reverse('experience-edit', kwargs={'pk': self.pk})
+
 
 class Course(models.Model):
     name = models.CharField(
@@ -121,6 +128,9 @@ class Education(models.Model):
     def __str__(self):
         return self.institution
 
+    def get_absolute_url(self):
+        return reverse('education-edit', kwargs={'pk': self.pk})
+
 
 class PersonalProfile(models.Model):
     name = models.CharField(
@@ -142,6 +152,9 @@ class PersonalProfile(models.Model):
 
     def __str__(self):
         return self.name
+
+    def get_absolute_url(self):
+        return reverse('profile-edit', kwargs={'pk': self.pk})
 
 
 class CV(models.Model):

@@ -4,6 +4,7 @@ Feature: View CV Elements
   In Order to see the skills, experience, education and profile elements I've entered into the system
   I Want to see a list of these elements
 
+  @meh
   Scenario: List skills
     When I view the listing of skills
     Then I should be able to see the skills I've added to the system
@@ -19,10 +20,12 @@ Feature: View CV Elements
     When I click on the "Add skill" button
     Then I should be taken to a form to add a skill
 
+  @meh
   Scenario: List experience
     When I view the listing of experiences
     Then I should be able to see the experiences I've added to the system
 
+  @meh
   Scenario: View experience from list
     Given I view the listing of experiences
     When I click on a experience element in the list
@@ -33,10 +36,12 @@ Feature: View CV Elements
     When I click on the "Add experience" button
     Then I should be taken to a form to add an experience
 
+  @meh
   Scenario: List education
     When I view the listing of educations
     Then I should be able to see the educations I've added to the system
 
+  @meh
   Scenario: View education from list
     Given I view the listing of educations
     When I click on a education element in the list
@@ -47,10 +52,12 @@ Feature: View CV Elements
     When I click on the "Add education" button
     Then I should be taken to a form to add an education
 
+  @meh
   Scenario: List profiles
     When I view the listing of profiles
     Then I should be able to see the profiles I've added to the system
 
+  @meh
   Scenario: View profiles from list
     Given I view the listing of profiles
     When I click on a profile in the list
