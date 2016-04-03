@@ -4,6 +4,7 @@ python:
 install:
   - pip install -r requirements.txt
 script:
+  - cd cvtool
   - python manage.py migrate --run-syncdb
   - python manage.py test cv
   - python manage.py behave --tags @fixtures
