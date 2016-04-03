@@ -6,4 +6,4 @@ install:
 script:
   - python manage.py migrate --run-syncdb
   - python manage.py test cv
-  - python manage,py behave --tags @fixtures
+  - python manage.py behave --tags @fixtures
