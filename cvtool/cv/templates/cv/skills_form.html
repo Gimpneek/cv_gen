@@ -1,4 +1,58 @@
-{% extends "base.html" %}
+{% extends "cv/base.html" %}
 {% block content %}
     <h1>{{ action }} Skill</h1>
+    <form action="" method="post" id="cv_element_form">
+        {% csrf_token %}
+        <div class="control is-horizontal">
+            <div class="control-label">
+                <label class="label" for="name">Name</label>
+            </div>
+            <p class="control">
+                <input name="name" class="input" type="text" value="{{ skill.name }}"/>
+            </p>
+        </div>
+        <div class="control is-horizontal">
+            <div class="control-label">
+                <label class="label" for="proficiency">How proficient are you?</label>
+            </div>
+            <p class="control">
+                <span class="select is-fullwidth">
+                    <select name="proficiency" class="select is-fullwidth">
+                        {% for prof_id, prof_title in skill.proficiency_choices %}
+                            <option value="{{ prof_id }}" {% if prof_id == skill.proficiency %} selected="selected" {% endif %}>{{ prof_title }}</option>
+                        {% endfor %}
+                    </select>
+                </span>
+            </p>
+        </div>
+        <div class="control is-horizontal">
+            <div class="control-label">
+                <label class="label" for="freshness">Is the skill current practice?</label>
+            </div>
+            <p class="control">
+                <span class="select is-fullwidth">
+                    <select name="freshness" class="select is-fullwidth">
+                        {% for fresh_id, fresh_title in skill.freshness_choices %}
+                            <option value="{{ fresh_id }}" {% if fresh_id == skill.freshness %} selected="selected" {% endif %}>{{ fresh_title }}</option>
+                        {% endfor %}
+                    </select>
+                </span>
+            </p>
+        </div>
+        <div class="control is-horizontal">
+            <div class="control-label">
+                <label class="label" for="tags">Tags</label>
+            </div>
+            <p class="control">
+                <select multiple="multiple" class="select is-fullwidth" name="tags">
+                    {% for tag in tags %}
+                        <option value="{{ tag.id }}" {% if tag.id in active_tags %} selected="selected" {% endif %}>{{ tag }}</option>
+                    {% endfor %}
+                </select>
+            </p>
+        </div>
+        <p class="control">
+            <input type="submit" value="Submit" class="button is-primary" />
+        </p>
+    </form>
 {% endblock %}

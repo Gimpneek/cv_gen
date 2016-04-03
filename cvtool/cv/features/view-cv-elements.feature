@@ -8,6 +8,7 @@ Feature: View CV Elements
     When I view the listing of skills
     Then I should be able to see the skills I've added to the system
 
+  @meh
   Scenario: View skill from list
     Given I view the listing of skills
     When I click on a skill in the list

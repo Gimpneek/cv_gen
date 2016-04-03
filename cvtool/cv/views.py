@@ -59,7 +59,7 @@ def education_list(request):
 
 def profiles_list(request):
     """
-    Show proflies added to the system
+    Show profiles added to the system
     """
     profiles = PersonalProfile.objects.order_by('id')
     return render(
@@ -69,5 +69,24 @@ def profiles_list(request):
             'title': 'Profiles',
             'type': 'profile',
             'items': profiles
+        }
+    )
+
+
+def skills_form(request, skill_id):
+    """
+    Show form to edit or add skills
+    """
+    skill = Skill.objects.get(pk=skill_id)
+    skill_tags = Skill.objects.filter(pk=skill_id).values_list('tags', flat=True)
+    tags = Tag.objects.order_by('id')
+    return render(
+        request,
+        'cv/skills_form.html',
+        {
+            'action': 'Edit',
+            'skill': skill,
+            'tags': tags,
+            'active_tags': skill_tags
         }
     )
