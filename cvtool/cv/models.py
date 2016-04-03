@@ -81,8 +81,11 @@ class Experience(models.Model):
         null=True,
         blank=True
     )
-    projects = models.ManyToManyField(Project)
-    responsibilities = models.ManyToManyField(Responsibility)
+    projects = models.ManyToManyField(Project, blank=True)
+    responsibilities = models.ManyToManyField(Responsibility, blank=True)
+
+    def __str__(self):
+        return "{0} - {1}".format(self.role, self.company)
 
 
 class Course(models.Model):
@@ -94,6 +97,9 @@ class Course(models.Model):
         max_length=128,
         help_text="Mark given"
     )
+
+    def __str__(self):
+        return self.name
 
 
 class Education(models.Model):
@@ -110,7 +116,10 @@ class Education(models.Model):
         blank=True
     )
     courses = models.ManyToManyField(Course)
-    projects = models.ManyToManyField(Project)
+    projects = models.ManyToManyField(Project, blank=True)
+
+    def __str__(self):
+        return self.institution
 
 
 class PersonalProfile(models.Model):
@@ -150,3 +159,6 @@ class CV(models.Model):
         Education,
         help_text="Education to use"
     )
+
+    def __str__(self):
+        return self.name
