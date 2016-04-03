@@ -1,8 +1,12 @@
 from selenium import webdriver
+import os
 
 
 def before_all(context):
-    context.browser = webdriver.Firefox()
+    if os.environ.get('TRAVIS'):
+        context.browser = webdriver.PhantomJS()
+    else:
+        context.browser = webdriver.Firefox()
 
 
 def after_all(context):
