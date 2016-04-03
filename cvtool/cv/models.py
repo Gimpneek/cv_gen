@@ -1,9 +1,12 @@
+""" Models for CV Tool """
 from django.db import models
 from django.core.urlresolvers import reverse
 
 
 class Skill(models.Model):
-
+    """
+    Model to hold job hunters skills
+    """
     proficiency_choices = (
         (1, "No Proficiency"),
         (2, "Basic Understanding"),
@@ -32,43 +35,70 @@ class Skill(models.Model):
     tags = models.ManyToManyField("Tag")
 
     def __str__(self):
+        """
+        String to return as the representation of this model
+        """
         return self.name
 
     def get_absolute_url(self):
+        """
+        URL to use when submitting forms
+        """
         return reverse('skill-edit', kwargs={'pk': self.pk})
 
 
 class Tag(models.Model):
+    """
+    Model to hold the information for tags assigned to skills and the like
+    """
     name = models.CharField(
         max_length=128,
         help_text="Name of tag"
     )
 
     def __str__(self):
+        """
+        String to return as the representation of this model
+        """
         return self.name
 
 
 class Responsibility(models.Model):
+    """
+    Model to hold the responsibilities job hunter had in jobs
+    """
     name = models.CharField(
         max_length=256,
         help_text="Name of responsibility"
     )
 
     def __str__(self):
+        """
+        String to return as the representation of this model
+        """
         return self.name
 
 
 class Project(models.Model):
+    """
+    Model to hold the projects job hunter did in jobs and education
+    """
     name = models.CharField(
         max_length=256,
         help_text="Name of project"
     )
 
     def __str__(self):
+        """
+        String to return as the representation of this model
+        """
         return self.name
 
 
 class Experience(models.Model):
+    """
+    Model to hold the experience and jobs they've had
+    """
     company = models.CharField(
         max_length=256,
         help_text="Company worked for"
@@ -89,13 +119,22 @@ class Experience(models.Model):
     responsibilities = models.ManyToManyField(Responsibility, blank=True)
 
     def __str__(self):
+        """
+        String to return as the representation of this model
+        """
         return "{0} - {1}".format(self.role, self.company)
 
     def get_absolute_url(self):
+        """
+        URL for form submission
+        """
         return reverse('experience-edit', kwargs={'pk': self.pk})
 
 
 class Course(models.Model):
+    """
+    Model to hold the information on the courses took as part of education
+    """
     name = models.CharField(
         max_length=256,
         help_text="Name of course taken"
@@ -106,10 +145,16 @@ class Course(models.Model):
     )
 
     def __str__(self):
+        """
+        String to return as the representation of this model
+        """
         return self.name
 
 
 class Education(models.Model):
+    """
+    Model to hold the education the job hunter has been through
+    """
     institution = models.CharField(
         max_length=256,
         help_text="Institution studied at"
@@ -126,13 +171,22 @@ class Education(models.Model):
     projects = models.ManyToManyField(Project, blank=True)
 
     def __str__(self):
+        """
+        String to return as the representation of this model
+        """
         return self.institution
 
     def get_absolute_url(self):
+        """
+        URL for form submission
+        """
         return reverse('education-edit', kwargs={'pk': self.pk})
 
 
 class PersonalProfile(models.Model):
+    """
+    Model to hold the profile information of the job hunter
+    """
     name = models.CharField(
         max_length=256,
         help_text="Your name"
@@ -151,13 +205,23 @@ class PersonalProfile(models.Model):
     )
 
     def __str__(self):
+        """
+        String to return as the representation of this model
+        """
         return self.name
 
     def get_absolute_url(self):
+        """
+        URL for form submission
+        """
         return reverse('profile-edit', kwargs={'pk': self.pk})
 
 
 class CV(models.Model):
+    """
+    Model to hold the generated CV with the information tailored to the search
+    that generated it
+    """
     name = models.CharField(
         max_length=256,
         help_text="name of CV"
@@ -177,4 +241,7 @@ class CV(models.Model):
     )
 
     def __str__(self):
+        """
+        String to return as the representation of this model
+        """
         return self.name

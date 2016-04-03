@@ -8,3 +8,5 @@ script:
   - python manage.py migrate --run-syncdb
   - python manage.py test cv
   - python manage.py behave --tags @fixtures
+  - cd ..
+  - pylint --load-plugins pylint_django cvtool/cv

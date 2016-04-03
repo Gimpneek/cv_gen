@@ -1,3 +1,5 @@
 Django==1.9.5
 behave-django==0.3.0
 selenium==2.53.1
+pylint==1.5.5
+pylint-django==0.7.1

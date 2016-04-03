@@ -1,5 +1,7 @@
+""" Administation screen setup """
 from django.contrib import admin
-from .models import *
+from .models import Tag, Skill, Responsibility, Project, Experience
+from .models import Course, Education, PersonalProfile, CV
 
 admin.site.register(Tag)
 admin.site.register(Skill)

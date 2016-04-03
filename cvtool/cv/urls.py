@@ -1,3 +1,4 @@
+""" URLs for CV App """
 from django.conf.urls import url
 from . import views
 
@@ -12,7 +13,8 @@ urlpatterns = [
 
     # Experience URLs
     url(r'^experiences/$', views.experience_list, name='experience_list'),
-    url(r'^experience/(?P<pk>[0-9]+)/$', views.ExperienceUpdateView.as_view(), name='experience-edit'),
+    url(r'^experience/(?P<pk>[0-9]+)/$', views.ExperienceUpdateView.as_view(),
+        name='experience-edit'),
     url(r'^experience/add/$', views.ExperienceCreateView.as_view(), name='experience-new'),
 
     # Education URLs

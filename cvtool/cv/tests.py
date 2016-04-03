@@ -1,5 +1,7 @@
+""" Unit Tests for CV app """
 from django.test import TestCase
-from .models import *
+from .models import Tag, Skill, Responsibility, Project, Experience
+from .models import Course, Education, PersonalProfile, CV
 
 
 class TestTag(TestCase):
@@ -278,17 +280,17 @@ class TestCV(TestCase):
         )
         personal_profile.save()
 
-        self.cv = CV(
+        self.generated_cv = CV(
             name="Test CV",
             personal_profile=personal_profile
         )
-        self.cv.save()
+        self.generated_cv.save()
 
-        skills = self.cv.skills.create(name="Bow craft Skills")
+        skills = self.generated_cv.skills.create(name="Bow craft Skills")
         skills.save()
         skills.tags.create(name="Awesome")
 
-        exp = self.cv.experiences.create(
+        exp = self.generated_cv.experiences.create(
             company="Test Corp",
             role="Senior Test Executor",
             start_date="2016-04-02",
@@ -298,7 +300,7 @@ class TestCV(TestCase):
         exp.projects.create(name='Test Project')
         exp.responsibilities.create(name="Test Responsibility")
 
-        edu = self.cv.education.create(
+        edu = self.generated_cv.education.create(
             institution="Test University",
             start_date="2006-08-01",
             end_date="2009-06-01"
@@ -311,24 +313,24 @@ class TestCV(TestCase):
         """
         Test name is set on CV
         """
-        self.assertEqual(self.cv.name, "Test CV")
+        self.assertEqual(self.generated_cv.name, "Test CV")
 
     def test_personal_profile(self):
         """
         Test personal profile is set on CV
         """
-        pp = self.cv.personal_profile
-        self.assertEqual(pp.name, "Colin Wren")
-        self.assertEqual(pp.email, "colin@gimpneek.com")
-        self.assertEqual(pp.website, "http://colinwren.is/awesome")
-        self.assertEqual(pp.portfolio, "https://github.com/Gimpneek")
-        self.assertEqual(pp.personal_statement, "meh")
+        profile = self.generated_cv.personal_profile
+        self.assertEqual(profile.name, "Colin Wren")
+        self.assertEqual(profile.email, "colin@gimpneek.com")
+        self.assertEqual(profile.website, "http://colinwren.is/awesome")
+        self.assertEqual(profile.portfolio, "https://github.com/Gimpneek")
+        self.assertEqual(profile.personal_statement, "meh")
 
     def test_skills(self):
         """
         Test skills are set on CV
         """
-        skill = self.cv.skills.get(pk=1)
+        skill = self.generated_cv.skills.get(pk=1)
         self.assertEqual(skill.name, "Bow craft Skills")
         self.assertEqual(skill.tags.get(pk=1).name, "Awesome")
 
@@ -336,7 +338,7 @@ class TestCV(TestCase):
         """
         Test experience set on CV
         """
-        exp = self.cv.experiences.get(pk=1)
+        exp = self.generated_cv.experiences.get(pk=1)
         self.assertEqual(exp.company, "Test Corp")
         self.assertEqual(exp.role, "Senior Test Executor")
         self.assertEqual(exp.start_date.year, 2016)
@@ -355,7 +357,7 @@ class TestCV(TestCase):
         """
         Test education set on CV
         """
-        edu = self.cv.education.get(pk=1)
+        edu = self.generated_cv.education.get(pk=1)
         self.assertEqual(edu.institution, "Test University")
         self.assertEqual(edu.start_date.year, 2006)
         self.assertEqual(edu.start_date.month, 8)
