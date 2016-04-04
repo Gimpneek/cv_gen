@@ -4,3 +4,4 @@ selenium==2.53.1
 pylint==1.5.5
 pylint-django==0.7.1
 flake8==2.5.4
+coverage==4.0.3

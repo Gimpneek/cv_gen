@@ -1,5 +1,6 @@
 """ Unit Tests for CV app """
 from django.test import TestCase
+from django.core.urlresolvers import reverse_lazy
 from .models import Tag, Skill, Responsibility, Project, Experience
 from .models import Course, Education, PersonalProfile, CV
 
@@ -9,12 +10,20 @@ class TestTag(TestCase):
     Test the tag class
     """
 
+    def setUp(self):
+        self.tag = Tag(name="Test Name")
+
     def test_name(self):
         """
         Test name for tag
         """
-        tag = Tag(name="Test Name")
-        self.assertEqual(tag.name, "Test Name")
+        self.assertEqual(self.tag.name, "Test Name")
+
+    def test_object_name(self):
+        """
+        Test __str__ for object
+        """
+        self.assertEqual(str(self.tag), "Test Name")
 
 
 class TestSkill(TestCase):
@@ -30,6 +39,7 @@ class TestSkill(TestCase):
         )
         self.skill.save()
         self.skill.tags.create(name="Test Tag")
+        self.view_resp = self.client.get(self.skill.get_absolute_url())
 
     def test_name(self):
         """
@@ -55,18 +65,76 @@ class TestSkill(TestCase):
         """
         self.assertEqual(self.skill.tags.get(pk=1).name, "Test Tag")
 
+    def test_object_name(self):
+        """
+        Test __str__ for object
+        """
+        self.assertEqual(str(self.skill), "Test Skill")
+
+    def test_absolute_url(self):
+        """
+        Test the absolute URL
+        """
+        self.assertIsNotNone(self.skill.get_absolute_url())
+
+    def test_view_contains_name(self):
+        """
+        Test the skill model view has name in it
+        """
+        self.assertContains(self.view_resp, self.skill.name)
+
+    def test_view_contains_profiency(self):
+        """
+        Test the skill model view has proficiency in it
+        """
+        self.assertContains(self.view_resp, self.skill.proficiency)
+
+    def test_view_contains_freshness(self):
+        """
+        Test the skill model view has freshness in it
+        """
+        self.assertContains(self.view_resp, self.skill.freshness)
+
+    def test_view_contains_tag(self):
+        """
+        Test the skill model view
+        """
+        self.assertContains(self.view_resp, self.skill.tags.get(pk=1).name)
+
+    def test_list_view(self):
+        """
+        Test skill in skills list view
+        """
+        list_resp = self.client.get(reverse_lazy('skills_list'))
+        self.assertContains(list_resp, str(self.skill))
+
+    def test_create_view(self):
+        """
+        Test create view
+        """
+        create_resp = self.client.get(reverse_lazy('skill-new'))
+        self.assertEqual(create_resp.status_code, 200)
+
 
 class TestResponsibility(TestCase):
     """
     Test Responsibility class
     """
 
+    def setUp(self):
+        self.resp = Responsibility(name="Test Responsibility")
+
     def test_name(self):
         """
         Test name is set on object
         """
-        resp = Responsibility(name="Test Responsibility")
-        self.assertEqual(resp.name, "Test Responsibility")
+        self.assertEqual(self.resp.name, "Test Responsibility")
+
+    def test_object_name(self):
+        """
+        Test __str__ for object
+        """
+        self.assertEqual(str(self.resp), "Test Responsibility")
 
 
 class TestProject(TestCase):
@@ -74,12 +142,20 @@ class TestProject(TestCase):
     Test Project class
     """
 
+    def setUp(self):
+        self.project = Project(name="Test Project")
+
     def test_name(self):
         """
         Test name is set on project
         """
-        project = Project(name="Test Project")
-        self.assertEqual(project.name, "Test Project")
+        self.assertEqual(self.project.name, "Test Project")
+
+    def test_object_name(self):
+        """
+        Test __str__ for object
+        """
+        self.assertEqual(str(self.project), "Test Project")
 
 
 class TestExperience(TestCase):
@@ -96,6 +172,7 @@ class TestExperience(TestCase):
         self.experience.save()
         self.experience.projects.create(name='Test Project')
         self.experience.responsibilities.create(name="Test Responsibility")
+        self.view_resp = self.client.get(self.experience.get_absolute_url())
 
     def test_company(self):
         """
@@ -139,6 +216,65 @@ class TestExperience(TestCase):
             "Test Project"
         )
 
+    def test_object_name(self):
+        """
+        Test __str__ for object
+        """
+        self.assertEqual(str(self.experience),
+                         "Senior Test Executor - Test Corp")
+
+    def test_absolute_url(self):
+        """
+        Test the absolute URL
+        """
+        self.assertIsNotNone(self.experience.get_absolute_url())
+
+    def test_view_contains_company(self):
+        """
+        Test the experience model view
+        """
+        self.assertContains(self.view_resp, self.experience.company)
+
+    def test_view_contains_role(self):
+        """
+        Test the experience model view
+        """
+        self.assertContains(self.view_resp, self.experience.role)
+
+    def test_view_contains_start_date(self):
+        """
+        Test the experience model view
+        """
+        self.assertContains(self.view_resp, self.experience.start_date)
+
+    def test_view_responsibility(self):
+        """
+        Test the experience model view
+        """
+        self.assertContains(self.view_resp,
+                            self.experience.responsibilities.get(pk=1).name)
+
+    def test_view_contains_project(self):
+        """
+        Test the experience model view
+        """
+        self.assertContains(self.view_resp,
+                            self.experience.projects.get(pk=1).name)
+
+    def test_list_view(self):
+        """
+        Test experience in experiences list view
+        """
+        list_resp = self.client.get(reverse_lazy('experience_list'))
+        self.assertContains(list_resp, str(self.experience))
+
+    def test_create_view(self):
+        """
+        Test create view
+        """
+        create_resp = self.client.get(reverse_lazy('experience-new'))
+        self.assertEqual(create_resp.status_code, 200)
+
 
 class TestCourse(TestCase):
     """
@@ -160,6 +296,12 @@ class TestCourse(TestCase):
         """
         self.assertEqual(self.course.mark, "Distinction")
 
+    def test_object_name(self):
+        """
+        Test __str__ for object
+        """
+        self.assertEqual(str(self.course), "Test Course")
+
 
 class TestEducation(TestCase):
     """
@@ -175,6 +317,7 @@ class TestEducation(TestCase):
         self.education.save()
         self.education.courses.create(name="BA (Hons) Testing", mark="First")
         self.education.projects.create(name="Test Driven Development")
+        self.view_resp = self.client.get(self.education.get_absolute_url())
 
     def test_institution(self):
         """
@@ -211,6 +354,64 @@ class TestEducation(TestCase):
             "Test Driven Development"
         )
 
+    def test_object_name(self):
+        """
+        Test __str__ for object
+        """
+        self.assertEqual(str(self.education), "Test University")
+
+    def test_absolute_url(self):
+        """
+        Test the absolute URL
+        """
+        self.assertIsNotNone(self.education.get_absolute_url())
+
+    def test_view_contains_institution(self):
+        """
+        Test the education model view
+        """
+        self.assertContains(self.view_resp, self.education.institution)
+
+    def test_view_contains_start_date(self):
+        """
+        Test the education model view
+        """
+        self.assertContains(self.view_resp, self.education.start_date)
+
+    def test_view_contains_end_date(self):
+        """
+        Test the education model view
+        """
+        self.assertContains(self.view_resp, self.education.end_date)
+
+    def test_view_contains_course(self):
+        """
+        Test the education model view
+        """
+        self.assertContains(self.view_resp,
+                            self.education.courses.get(pk=1).name)
+
+    def test_view_contains_project(self):
+        """
+        Test the education model view
+        """
+        self.assertContains(self.view_resp,
+                            self.education.projects.get(pk=1).name)
+
+    def test_list_view(self):
+        """
+        Test education in education list view
+        """
+        list_resp = self.client.get(reverse_lazy('education_list'))
+        self.assertContains(list_resp, str(self.education))
+
+    def test_create_view(self):
+        """
+        Test create view
+        """
+        create_resp = self.client.get(reverse_lazy('education-new'))
+        self.assertEqual(create_resp.status_code, 200)
+
 
 class TestPersonalProfile(TestCase):
     """
@@ -227,6 +428,8 @@ class TestPersonalProfile(TestCase):
                                "Developer with a passion for delivering high "
                                "quality and valuable software."
         )
+        self.profile.save()
+        self.view_resp = self.client.get(self.profile.get_absolute_url())
 
     def test_name(self):
         """
@@ -262,6 +465,62 @@ class TestPersonalProfile(TestCase):
             "Developer with a passion for delivering high "
             "quality and valuable software."
         )
+
+    def test_object_name(self):
+        """
+        Test __str__ for object
+        """
+        self.assertEqual(str(self.profile), "Colin Wren")
+
+    def test_absolute_url(self):
+        """
+        Test the absolute URL
+        """
+        self.assertIsNotNone(self.profile.get_absolute_url())
+
+    def test_view_contains_name(self):
+        """
+        Test the profile model view
+        """
+        self.assertContains(self.view_resp, self.profile.name)
+
+    def test_view_contains_email(self):
+        """
+        Test the profile model view
+        """
+        self.assertContains(self.view_resp, self.profile.email)
+
+    def test_view_contains_website(self):
+        """
+        Test the profile model view
+        """
+        self.assertContains(self.view_resp, self.profile.website)
+
+    def test_view_contains_portfolio(self):
+        """
+        Test the profile model view
+        """
+        self.assertContains(self.view_resp, self.profile.portfolio)
+
+    def test_view_contains_statement(self):
+        """
+        Test the profile model view
+        """
+        self.assertContains(self.view_resp, self.profile.personal_statement)
+
+    def test_list_view(self):
+        """
+        Test profile in profiles list view
+        """
+        list_resp = self.client.get(reverse_lazy('profiles_list'))
+        self.assertContains(list_resp, str(self.profile))
+
+    def test_create_view(self):
+        """
+        Test create view
+        """
+        create_resp = self.client.get(reverse_lazy('profile-new'))
+        self.assertEqual(create_resp.status_code, 200)
 
 
 class TestCV(TestCase):
@@ -370,3 +629,54 @@ class TestCV(TestCase):
         self.assertEqual(course.mark, "First")
         self.assertEqual(edu.projects.get(pk=2).name,
                          "Test Driven Development")
+
+    def test_object_name(self):
+        """
+        Test __str__ for object
+        """
+        self.assertEqual(str(self.generated_cv), "Test CV")
+
+
+class TestHomePage(TestCase):
+    """
+    Test HomePage view
+    """
+
+    def setUp(self):
+        self.view_resp = self.client.get('/')
+
+    def test_welcome(self):
+        """
+        Test Welcome is present on homepage
+        """
+        self.assertContains(self.view_resp, 'Welcome')
+
+    def test_skills_menu(self):
+        """
+        Test skills in side menu
+        """
+        self.assertContains(self.view_resp, 'Skills')
+
+    def test_experiences_menu(self):
+        """
+        Test experiences in side meny
+        """
+        self.assertContains(self.view_resp, 'Experience')
+
+    def test_education_menu(self):
+        """
+        Test education in side menu
+        """
+        self.assertContains(self.view_resp, 'Education')
+
+    def test_profile_menu(self):
+        """
+        Test profile in side menu
+        """
+        self.assertContains(self.view_resp, 'Profile')
+
+    def test_generate_cv_menu(self):
+        """
+        Test generate cv in side menu
+        """
+        self.assertContains(self.view_resp, 'Generated CVs')
