@@ -2,10 +2,7 @@ from behave import given, when, then
 from selenium.webdriver.common.by import By
 from cv.views import SkillUpdateView, ExperienceUpdateView
 from cv.views import EducationUpdateView, ProfileUpdateView
-
-
-list_item_selector = (By.CSS_SELECTOR, '#listing a')
-add_element_button_selector = (By.ID, 'add_cv_element')
+import page_helpers
 
 
 @given('I view the listing of {listing}')
@@ -37,7 +34,7 @@ def check_listing(context, item_type):
             'Colin Wren'
         ]
     }
-    links = context.browser.find_elements(*list_item_selector)
+    links = context.browser.find_elements(*page_helpers.list_item_selector)
     assert([link.text for link in links] == items[item_type])
 
 
@@ -46,7 +43,7 @@ def click_list_item(context, item):
     """
     Click on list item
     """
-    links = context.browser.find_elements(*list_item_selector)
+    links = context.browser.find_elements(*page_helpers.list_item_selector)
     links[0].click()
 
 
@@ -55,7 +52,8 @@ def click_add_element_button(context, item):
     """
     Click on the button to add element
     """
-    button = context.browser.find_element(*add_element_button_selector)
+    button = \
+        context.browser.find_element(*page_helpers.add_element_button_selector)
     button.click()
 
 

@@ -1,4 +1,4 @@
-@fixtures
+@fixtures @dev
 Feature: View CV Elements
   As A Job Hunter
   In Order to see the skills, experience, education and profile elements I've entered into the system
