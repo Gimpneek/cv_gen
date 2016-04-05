@@ -6,4 +6,3 @@ pylint-django==0.7.1
 flake8==2.5.4
 coverage==4.0.3
 beautifulsoup4==4.4.1
-python-coveralls==2.7.0
