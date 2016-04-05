@@ -1,3 +1,4 @@
+{% load base_extras %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -39,10 +40,10 @@
                         CV Elements
                       </p>
                       <ul class="menu-list">
-                        <li><a href="/skills">Skills</a></li>
-                        <li><a href="/experiences">Experience</a></li>
-                        <li><a href="/educations">Education</a></li>
-                        <li><a href="/profiles">Profiles</a></li>
+                        <li><a href="/skills" class="{% navactive request 'skills_list skill-new skill-edit' %}">Skills</a></li>
+                        <li><a href="/experiences" class="{% navactive request 'experience_list experience-new experience-edit' %}">Experience</a></li>
+                        <li><a href="/educations" class="{% navactive request 'education_list education-new education-edit' %}">Education</a></li>
+                        <li><a href="/profiles" class="{% navactive request 'profiles_list profile-new profile-edit' %}">Profiles</a></li>
                       </ul>
                       <p class="menu-label">
                         CVs
