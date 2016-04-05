@@ -1,7 +1,9 @@
 from behave import given, when, then
 from selenium.webdriver.common.by import By
-from cv.views import SkillUpdateView, ExperienceUpdateView
-from cv.views import EducationUpdateView, ProfileUpdateView
+from cv.views.skill import SkillUpdateView
+from cv.views.experience import ExperienceUpdateView
+from cv.views.education import EducationUpdateView
+from cv.views.profile import ProfileUpdateView
 import page_helpers
 
 
