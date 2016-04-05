@@ -1,3 +1,4 @@
+# pylint: disable=too-many-ancestors
 """ Views for Skill class
 - List View
 - CreateView

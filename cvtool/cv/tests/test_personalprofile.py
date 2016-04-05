@@ -1,3 +1,4 @@
+""" Test for PersonalProfile class """
 from django.test import TestCase
 from django.core.urlresolvers import reverse_lazy
 from cv.models import PersonalProfile

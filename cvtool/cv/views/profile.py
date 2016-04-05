@@ -1,3 +1,4 @@
+# pylint: disable=too-many-ancestors
 """ Views for profile (personal profile) class """
 from django.shortcuts import render
 from django.views.generic.edit import CreateView, UpdateView

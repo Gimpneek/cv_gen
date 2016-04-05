@@ -1,3 +1,4 @@
+# pylint: disable=too-many-ancestors
 """ Views for homepage """
 from django.shortcuts import render
 
