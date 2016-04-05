@@ -7,7 +7,7 @@ install:
 script:
   - cd cvtool
   - python manage.py migrate --run-syncdb
-  - coverage run --source="." --omit="cvtool/*" manage.py test cv
+  - coverage run manage.py test cv
   - python manage.py behave --tags @fixtures
   - cd ..
   - pylint --load-plugins pylint_django cvtool/cv
