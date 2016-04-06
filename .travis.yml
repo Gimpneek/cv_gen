@@ -5,12 +5,11 @@ install:
   - pip install -r requirements.txt
   - pip install coveralls
 script:
-  - cd cvtool
-  - python manage.py migrate --run-syncdb
-  - coverage run manage.py test cv
-  - python manage.py behave --tags @fixtures
-  - cd ..
+  - python cvtool/manage.py migrate --run-syncdb
+  - coverage run cvtool/manage.py test cv
+  - python cvtool/manage.py behave --tags @fixtures
   - pylint --load-plugins pylint_django cvtool/cv
   - flake8 cvtool
 after_success:
+  - cat .coverage
   - coveralls debug
