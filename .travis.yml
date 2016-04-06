@@ -13,5 +13,4 @@ script:
   - pylint --load-plugins pylint_django cvtool/cv
   - flake8 cvtool
 after_success:
-  - cat .coverage
-  - coveralls debug
+  - coveralls
