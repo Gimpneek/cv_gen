@@ -1,5 +1,7 @@
 """ Test homepage view """
 from django.test import TestCase
+from django.core.urlresolvers import reverse_lazy
+from bs4 import BeautifulSoup
 
 
 class TestHomePage(TestCase):
@@ -8,7 +10,7 @@ class TestHomePage(TestCase):
     """
 
     def setUp(self):
-        self.view_resp = self.client.get('/')
+        self.view_resp = self.client.get(reverse_lazy('index'))
 
     def test_welcome(self):
         """
@@ -45,3 +47,14 @@ class TestHomePage(TestCase):
         Test generate cv in side menu
         """
         self.assertContains(self.view_resp, 'Generated CVs')
+
+    def test_menu_highlight(self):
+        """
+        Test menu is highlighted on list view
+        """
+        list_resp = self.client.get(reverse_lazy('index'))
+        bslist_resp = BeautifulSoup(list_resp.content, 'html.parser')
+        menu_list = bslist_resp.select('.menu-list li a')
+        for menu_item in menu_list:
+            item_class = menu_item.get('class', [''])
+            self.assertEqual(item_class[0], '')

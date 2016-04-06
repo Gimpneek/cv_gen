@@ -10,9 +10,15 @@ register = template.Library()
 
 @register.simple_tag
 def navactive(request, views):
-    # if request.path in (reverse_lazy(url) for url in urls.split()):
-    #     return "active"
-    # return ""
+    """
+    Template tag to check to see if the page the user is currently on is in
+    an array of reverse url look ups
+    Args:
+        request: Request object sent while rendering page
+        views: space separated string of url names (ie: 'skill-edit skill-new')
+
+    Returns: string to be used in class attribute
+    """
     try:
         view = resolve(request.path).url_name
         if view in views:
