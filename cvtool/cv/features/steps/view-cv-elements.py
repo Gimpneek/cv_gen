@@ -1,3 +1,4 @@
+""" Implement steps in view-cv-elements.feature """
 from behave import given, when, then
 from selenium.webdriver.common.by import By
 from cv.views.skill import SkillUpdateView
@@ -36,7 +37,7 @@ def check_listing(context, item_type):
             'Colin Wren'
         ]
     }
-    links = context.browser.find_elements(*page_helpers.list_item_selector)
+    links = context.browser.find_elements(*page_helpers.LIST_ITEM_SELECTOR)
     assert([link.text for link in links] == items[item_type])
 
 
@@ -45,7 +46,7 @@ def click_list_item(context, item):
     """
     Click on list item
     """
-    links = context.browser.find_elements(*page_helpers.list_item_selector)
+    links = context.browser.find_elements(*page_helpers.LIST_ITEM_SELECTOR)
     links[0].click()
 
 
@@ -55,7 +56,7 @@ def click_add_element_button(context, item):
     Click on the button to add element
     """
     button = \
-        context.browser.find_element(*page_helpers.add_element_button_selector)
+        context.browser.find_element(*page_helpers.ADD_ELEMENT_BUTTON_SELECTOR)
     button.click()
 
 

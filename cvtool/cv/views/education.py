@@ -29,6 +29,7 @@ class EducationCreateView(CreateView):
     """
     model = Education
     fields = ['institution', 'start_date', 'end_date', 'courses', 'projects']
+    success_url = reverse_lazy('education_list')
 
     def get_context_data(self, **kwargs):
         """

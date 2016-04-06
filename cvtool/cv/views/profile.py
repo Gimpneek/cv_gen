@@ -28,6 +28,7 @@ class ProfileCreateView(CreateView):
     """
     model = PersonalProfile
     fields = ['name', 'email', 'website', 'portfolio', 'personal_statement']
+    success_url = reverse_lazy('profiles_list')
 
     def get_context_data(self, **kwargs):
         """

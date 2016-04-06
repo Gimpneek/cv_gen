@@ -195,10 +195,12 @@ class PersonalProfile(models.Model):
         help_text="Your email address"
     )
     website = models.URLField(
-        help_text="Your website URL"
+        help_text="Your website URL",
+        blank=True
     )
     portfolio = models.URLField(
-        help_text="Your portfolio URL"
+        help_text="Your portfolio URL",
+        blank=True
     )
     personal_statement = models.TextField(
         help_text="Personal Statement to summarise who you are"

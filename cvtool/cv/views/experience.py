@@ -29,6 +29,7 @@ class ExperienceCreateView(CreateView):
     model = Experience
     fields = ['company', 'role', 'start_date', 'end_date', 'projects',
               'responsibilities']
+    success_url = reverse_lazy('experience_list')
 
     def get_context_data(self, **kwargs):
         """
