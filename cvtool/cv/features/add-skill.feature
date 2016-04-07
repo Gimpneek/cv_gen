@@ -1,3 +1,4 @@
+@dev
 Feature: Add skill
   As A Job Hunter
   In Order to add a skill to my CV
@@ -5,12 +6,13 @@ Feature: Add skill
 
   Scenario: Add Name for skill
     When I create a new skill
-    Then I should be able to name the skill
+    Then I should be able to add a name for the skill
 
   Scenario: Add minimal information for skill
     Given I create a new skill
-    When I only add the name of the skill
-    Then I should be able to submit the form
+    Then I should be able to submit the form by only adding:
+    | information          |
+    | a name for the skill |
 
   Scenario: Add existing tag to skill
     When I create a new skill

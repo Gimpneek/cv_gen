@@ -32,7 +32,7 @@ class Skill(models.Model):
         help_text="Is skill current practice?",
         default=4
     )
-    tags = models.ManyToManyField("Tag")
+    tags = models.ManyToManyField("Tag", blank=True)
 
     def __str__(self):
         """

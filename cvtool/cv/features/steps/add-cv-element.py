@@ -25,6 +25,15 @@ def add_data_to_form(context, action):
     assert(added_data == data)
 
 
+@then('I should be able to select {action}')
+def select_data_in_form(context, action):
+    action_data = page_helpers.SELECT_DATA_ACTIONS.get(action)
+    key = action_data.get('key')
+    data = action_data.get('data')
+    selected_data = page_helpers.select_data(context, key, data)
+    assert (selected_data == data)
+
+
 @then('I should be able to submit the form by only adding')
 def add_minimal_data_submit(context):
     for row in context.table:

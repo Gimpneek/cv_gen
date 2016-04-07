@@ -19,7 +19,11 @@
                 <span class="select is-fullwidth">
                     <select name="proficiency" class="select is-fullwidth">
                         {% for prof_id, prof_title in proficiency_choices %}
-                            <option value="{{ prof_id }}" {% if prof_id == skill.proficiency %} selected="selected" {% endif %}>{{ prof_title }}</option>
+                            <option value="{{ prof_id }}" {% if skill %}
+                                    {% if prof_id == skill.proficiency %} selected="selected" {% endif %}
+                                    {% else %}
+                                    {% if prof_id == 2 %} selected="selected" {% endif %}
+                                    {% endif %}>{{ prof_title }}</option>
                         {% endfor %}
                     </select>
                 </span>
@@ -33,7 +37,11 @@
                 <span class="select is-fullwidth">
                     <select name="freshness" class="select is-fullwidth">
                         {% for fresh_id, fresh_title in freshness_choices %}
-                            <option value="{{ fresh_id }}" {% if fresh_id == skill.freshness %} selected="selected" {% endif %}>{{ fresh_title }}</option>
+                            <option value="{{ fresh_id }}" {% if skill %}
+                                    {% if fresh_id == skill.freshness %} selected="selected" {% endif %}
+                                    {% else %}
+                                    {% if fresh_id == 4 %} selected="selected" {% endif %}
+                                    {% endif %}>{{ fresh_title }}</option>
                         {% endfor %}
                     </select>
                 </span>
