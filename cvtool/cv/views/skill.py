@@ -55,7 +55,7 @@ class SkillUpdateView(UpdateView):
     Edit view for skills
     """
     model = Skill
-    fields = ['name', 'proficiency', 'freshness', 'tags']
+    form_class = SkillForm
     success_url = reverse_lazy('skills_list')
 
     def get_context_data(self, **kwargs):
