@@ -8,6 +8,7 @@ from django.shortcuts import render
 from django.views.generic.edit import CreateView, UpdateView
 from django.core.urlresolvers import reverse_lazy
 from cv.models import Tag, Skill
+from cv.forms.skill import SkillForm
 
 
 def skills_list(request):
@@ -31,7 +32,7 @@ class SkillCreateView(CreateView):
     Create View for skills
     """
     model = Skill
-    fields = ['name', 'proficiency', 'freshness', 'tags']
+    form_class = SkillForm
     success_url = reverse_lazy('skills_list')
 
     def get_context_data(self, **kwargs):

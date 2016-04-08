@@ -7,8 +7,14 @@
             <div class="control-label">
                 <label class="label" for="name">Name</label>
             </div>
-            <p class="control">
-                <input name="name" class="input" type="text" value="{{ skill.name }}"/>
+            <p class="control {% if 'name' in form.errors %} has-icon has-icon-right {% endif %}">
+                <input name="name" class="input {% if 'name' in form.errors %} is-danger {% endif %}" type="text" value="{{ skill.name }}"/>
+                {% if 'name' in form.errors %}
+                    {% for error in form.errors.name %}
+                        <i class="fa fa-warning"></i>
+                        <span class="help is-danger">{{ error }}</span>
+                    {% endfor %}
+                {% endif %}
             </p>
         </div>
         <div class="control is-horizontal">
