@@ -9,7 +9,8 @@ class TestFormSkill(SkillTestCase):
     Test the form for skills
     """
 
-    def test_init(self):
+    @staticmethod
+    def test_init():
         """
         Test creates the form successfully
         """
