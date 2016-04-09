@@ -102,22 +102,30 @@ class Experience(models.Model):
     """
     company = models.CharField(
         max_length=256,
-        help_text="Company worked for"
+        help_text="Company worked for",
+        default=""
     )
     role = models.CharField(
         max_length=256,
-        help_text="Role/Position held"
+        help_text="Role/Position held",
+        default=""
     )
     start_date = models.DateField(
-        help_text="Date started job"
+        help_text="Date started job",
+        default=""
     )
     end_date = models.DateField(
         help_text="Date ended job",
         null=True,
         blank=True
     )
-    projects = models.ManyToManyField(Project, blank=True)
-    responsibilities = models.ManyToManyField(Responsibility, blank=True)
+    projects = models.ManyToManyField(
+        Project, blank=True,
+        help_text="Projects worked on during employment")
+    responsibilities = models.ManyToManyField(
+        Responsibility, blank=True,
+        help_text="Responsibilities of job?"
+    )
 
     def __str__(self):
         """

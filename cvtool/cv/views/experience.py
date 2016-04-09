@@ -4,6 +4,7 @@ from django.shortcuts import render
 from django.views.generic.edit import CreateView, UpdateView
 from django.core.urlresolvers import reverse_lazy
 from cv.models import Project, Responsibility, Experience
+from cv.forms.experience import ExperienceForm
 
 
 def experience_list(request):
@@ -27,8 +28,7 @@ class ExperienceCreateView(CreateView):
     Create view for experience
     """
     model = Experience
-    fields = ['company', 'role', 'start_date', 'end_date', 'projects',
-              'responsibilities']
+    form_class = ExperienceForm
     success_url = reverse_lazy('experience_list')
 
     def get_context_data(self, **kwargs):
@@ -48,8 +48,7 @@ class ExperienceUpdateView(UpdateView):
     Edit view for experience
     """
     model = Experience
-    fields = ['company', 'role', 'start_date', 'end_date', 'projects',
-              'responsibilities']
+    form_class = ExperienceForm
     success_url = reverse_lazy('experience_list')
 
     def get_context_data(self, **kwargs):
