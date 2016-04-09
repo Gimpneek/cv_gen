@@ -201,21 +201,26 @@ class PersonalProfile(models.Model):
     """
     name = models.CharField(
         max_length=256,
-        help_text="Your name"
+        help_text="Your name",
+        default=""
     )
     email = models.EmailField(
-        help_text="Your email address"
+        help_text="Your email address",
+        default=""
     )
     website = models.URLField(
         help_text="Your website URL",
-        blank=True
+        blank=True,
+        default=""
     )
     portfolio = models.URLField(
         help_text="Your portfolio URL",
-        blank=True
+        blank=True,
+        default=""
     )
     personal_statement = models.TextField(
-        help_text="Personal Statement to summarise who you are"
+        help_text="Personal Statement to summarise who you are",
+        default=""
     )
 
     def __str__(self):

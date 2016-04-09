@@ -14,6 +14,15 @@
                 {% if field|fieldtype == 'DateInput' %}
                     <input name="{{ field.html_name }}" class="input {% if field.errors %} is-danger {% endif %}" type="date" value="{{ field.value|date:"Y-m-d" }}"/>
                 {% endif %}
+                {% if field|fieldtype == 'EmailInput' %}
+                    <input name="{{ field.html_name }}" class="input {% if field.errors %} is-danger {% endif %}" type="text" value="{{ field.value }}"/>
+                {% endif %}
+                {% if field|fieldtype == 'URLInput' %}
+                    <input name="{{ field.html_name }}" class="input {% if field.errors %} is-danger {% endif %}" type="text" value="{{ field.value }}"/>
+                {% endif %}
+                {% if field|fieldtype == 'Textarea' %}
+                    <textarea name="{{ field.html_name }}" class="textarea" type="text">{{ field.value }}</textarea>
+                {% endif %}
                 {% if field|fieldtype  == 'Select' %}
                     <span class="select is-fullwidth">
                         <select name="{{ field.html_name }}" class="select is-fullwidth">

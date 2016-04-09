@@ -2,52 +2,13 @@
 {% block content %}
     <h1>{{ action }} Profile</h1>
     <form action="" method="post" id="cv_element_form">
+        {% if form.non_field_errors %}
+            <div class="notification is-danger">
+                <p>{{ form.non_field_errors }}</p>
+            </div>
+        {% endif %}
         {% csrf_token %}
-        <div class="control is-horizontal">
-            <div class="control-label">
-                <label class="label" for="name">Name</label>
-            </div>
-            <p class="control">
-                <input name="name" class="input" type="text" value="{{ personalprofile.name }}"/>
-            </p>
-        </div>
-
-        <div class="control is-horizontal">
-            <div class="control-label">
-                <label class="label" for="email">Email Address</label>
-            </div>
-            <p class="control">
-                <input name="email" class="input" type="text" value="{{ personalprofile.email }}"/>
-            </p>
-        </div>
-
-        <div class="control is-horizontal">
-            <div class="control-label">
-                <label class="label" for="website">Website</label>
-            </div>
-            <p class="control">
-                <input name="website" class="input" type="text" value="{{ personalprofile.website }}"/>
-            </p>
-        </div>
-
-        <div class="control is-horizontal">
-            <div class="control-label">
-                <label class="label" for="portfolio">Portfolio</label>
-            </div>
-            <p class="control">
-                <input name="portfolio" class="input" type="text" value="{{ personalprofile.portfolio }}"/>
-            </p>
-        </div>
-
-        <div class="control is-horizontal">
-            <div class="control-label">
-                <label class="label" for="personal_statement">Personal Statement</label>
-            </div>
-            <p class="control">
-                <textarea name="personal_statement" class="textarea" type="text">{{ personalprofile.personal_statement }}</textarea>
-            </p>
-        </div>
-
+        {% include "cv/form_input_snippet.html" %}
         <p class="control">
             <input type="submit" value="Submit" class="button is-primary" id="form_submit" />
         </p>
