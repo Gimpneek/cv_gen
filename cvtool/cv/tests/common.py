@@ -66,3 +66,10 @@ class SkillTestCase(TestCase):
         )
         self.skill.save()
         self.skill.tags.create(name="Test Tag")
+
+
+def invalid_start_date(form):
+    """ Test that the form is invalid and has an error for start date """
+    valid = form.is_valid()
+    error_msg = form.errors.get('start_date')
+    return not valid and error_msg == ['This field is required.']

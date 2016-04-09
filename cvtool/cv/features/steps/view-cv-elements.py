@@ -3,7 +3,7 @@ from behave import given, when, then
 from selenium.webdriver.common.by import By
 from cv.forms.skill import SkillForm
 from cv.forms.experience import ExperienceForm
-from cv.views.education import EducationUpdateView
+from cv.forms.education import EducationForm
 from cv.views.profile import ProfileUpdateView
 import page_helpers
 
@@ -69,7 +69,7 @@ def view_edit_form(context, item):
     switch = {
         'skill': SkillForm.Meta.fields,
         'experience': ExperienceForm.Meta.fields,
-        'education': EducationUpdateView.fields,
+        'education': EducationForm.Meta.fields,
         'profile': ProfileUpdateView.fields
     }
     form_elements = switch[item]

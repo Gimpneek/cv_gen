@@ -166,7 +166,8 @@ class Education(models.Model):
     """
     institution = models.CharField(
         max_length=256,
-        help_text="Institution studied at"
+        help_text="Institution studied at",
+        default=""
     )
     start_date = models.DateField(
         help_text="Date started studies"
@@ -176,8 +177,10 @@ class Education(models.Model):
         null=True,
         blank=True
     )
-    courses = models.ManyToManyField(Course)
-    projects = models.ManyToManyField(Project, blank=True)
+    courses = models.ManyToManyField(Course, help_text="Courses studied")
+    projects = models.ManyToManyField(
+        Project, blank=True,
+        help_text="Projects completed during studies")
 
     def __str__(self):
         """
