@@ -21,9 +21,9 @@ Feature: Add skill
     | invalid_field        |
     | a name for the skill |
 
-#  Scenario: Add existing tag to skill
-#    When I create a new skill
-#    Then I should be able to assign a tag to the skill
+  Scenario: Add existing tag to skill
+    When I create a new skill
+    Then I should be able to assign a tag to the skill
 
 #  Scenario: Add new tag to skill
 #    When I create a new skill
