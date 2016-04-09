@@ -27,3 +27,15 @@ def navactive(request, views):
             return ""
     except Resolver404:
         return ""
+
+
+@register.filter('fieldtype')
+def field_type(field):
+    """
+    Access the widget in form field and return the name of the class for
+    conditional rendering
+    Args:
+        field: form field
+    Returns: string of form field type
+    """
+    return field.field.widget.__class__.__name__

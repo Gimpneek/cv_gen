@@ -5,6 +5,7 @@ from django.views.generic.edit import CreateView, UpdateView
 from django.core.urlresolvers import reverse_lazy
 from cv.models import Project
 from cv.models import Course, Education
+from cv.forms.education import EducationForm
 
 
 def education_list(request):
@@ -28,7 +29,7 @@ class EducationCreateView(CreateView):
     Create view for the education
     """
     model = Education
-    fields = ['institution', 'start_date', 'end_date', 'courses', 'projects']
+    form_class = EducationForm
     success_url = reverse_lazy('education_list')
 
     def get_context_data(self, **kwargs):
@@ -48,7 +49,7 @@ class EducationUpdateView(UpdateView):
     Edit view for the education
     """
     model = Education
-    fields = ['institution', 'start_date', 'end_date', 'courses', 'projects']
+    form_class = EducationForm
     success_url = reverse_lazy('education_list')
 
     def get_context_data(self, **kwargs):

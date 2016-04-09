@@ -21,18 +21,19 @@ class Skill(models.Model):
         (4, "Current Practice"),
         (5, "Not Widely Adopted Yet")
     )
-    name = models.CharField(max_length=256, help_text="Name of skill")
+    name = models.CharField(max_length=256, help_text="Name of skill",
+                            default="")
     proficiency = models.SmallIntegerField(
         choices=proficiency_choices,
         help_text="Proficiency of skill",
-        default=2
+        default=3
     )
     freshness = models.SmallIntegerField(
         choices=freshness_choices,
         help_text="Is skill current practice?",
         default=4
     )
-    tags = models.ManyToManyField("Tag", blank=True)
+    tags = models.ManyToManyField("Tag", help_text='Tags', blank=True)
 
     def __str__(self):
         """
@@ -101,22 +102,30 @@ class Experience(models.Model):
     """
     company = models.CharField(
         max_length=256,
-        help_text="Company worked for"
+        help_text="Company worked for",
+        default=""
     )
     role = models.CharField(
         max_length=256,
-        help_text="Role/Position held"
+        help_text="Role/Position held",
+        default=""
     )
     start_date = models.DateField(
-        help_text="Date started job"
+        help_text="Date started job",
+        default=""
     )
     end_date = models.DateField(
         help_text="Date ended job",
         null=True,
         blank=True
     )
-    projects = models.ManyToManyField(Project, blank=True)
-    responsibilities = models.ManyToManyField(Responsibility, blank=True)
+    projects = models.ManyToManyField(
+        Project, blank=True,
+        help_text="Projects worked on during employment")
+    responsibilities = models.ManyToManyField(
+        Responsibility, blank=True,
+        help_text="Responsibilities of job?"
+    )
 
     def __str__(self):
         """
@@ -157,7 +166,8 @@ class Education(models.Model):
     """
     institution = models.CharField(
         max_length=256,
-        help_text="Institution studied at"
+        help_text="Institution studied at",
+        default=""
     )
     start_date = models.DateField(
         help_text="Date started studies"
@@ -167,8 +177,10 @@ class Education(models.Model):
         null=True,
         blank=True
     )
-    courses = models.ManyToManyField(Course)
-    projects = models.ManyToManyField(Project, blank=True)
+    courses = models.ManyToManyField(Course, help_text="Courses studied")
+    projects = models.ManyToManyField(
+        Project, blank=True,
+        help_text="Projects completed during studies")
 
     def __str__(self):
         """
@@ -189,21 +201,26 @@ class PersonalProfile(models.Model):
     """
     name = models.CharField(
         max_length=256,
-        help_text="Your name"
+        help_text="Your name",
+        default=""
     )
     email = models.EmailField(
-        help_text="Your email address"
+        help_text="Your email address",
+        default=""
     )
     website = models.URLField(
         help_text="Your website URL",
-        blank=True
+        blank=True,
+        default=""
     )
     portfolio = models.URLField(
         help_text="Your portfolio URL",
-        blank=True
+        blank=True,
+        default=""
     )
     personal_statement = models.TextField(
-        help_text="Personal Statement to summarise who you are"
+        help_text="Personal Statement to summarise who you are",
+        default=""
     )
 
     def __str__(self):

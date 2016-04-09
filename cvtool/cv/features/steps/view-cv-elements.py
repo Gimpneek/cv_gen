@@ -1,10 +1,10 @@
 """ Implement steps in view-cv-elements.feature """
 from behave import given, when, then
 from selenium.webdriver.common.by import By
-from cv.views.skill import SkillUpdateView
-from cv.views.experience import ExperienceUpdateView
-from cv.views.education import EducationUpdateView
-from cv.views.profile import ProfileUpdateView
+from cv.forms.skill import SkillForm
+from cv.forms.experience import ExperienceForm
+from cv.forms.education import EducationForm
+from cv.forms.profile import ProfileForm
 import page_helpers
 
 
@@ -67,10 +67,10 @@ def view_edit_form(context, item):
     Verify on edit form
     """
     switch = {
-        'skill': SkillUpdateView.fields,
-        'experience': ExperienceUpdateView.fields,
-        'education': EducationUpdateView.fields,
-        'profile': ProfileUpdateView.fields
+        'skill': SkillForm.Meta.fields,
+        'experience': ExperienceForm.Meta.fields,
+        'education': EducationForm.Meta.fields,
+        'profile': ProfileForm.Meta.fields
     }
     form_elements = switch[item]
     for form_element in form_elements:
