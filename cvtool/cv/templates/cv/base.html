@@ -1,34 +1,12 @@
 {% load base_extras %}
+{% load static from staticfiles %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>CV Tool</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.0.17/css/bulma.min.css" rel="stylesheet"/>
-    <style>
-        .select[multiple]{
-            height: 100%;
-        }
-        .control.is-horizontal .control{
-            flex-flow: column;
-        }
-        .control.is-horizontal .control.tags > span{
-            flex-flow: row;
-        }
-        .control .tags .tag{
-            margin-bottom: 0.5em;
-        }
-        .control.is-horizontal .control.tags span.has-addons{
-            margin-top: 1em;
-        }
-        .control.is-horizontal .input, .control.is-horizontal .help{
-            flex: 1;
-        }
-        .tag{
-            margin-right: 10px;
-        }
-    </style>
-</head>
+    <link href="{% static "cv/css/bulma_overrides.css" %}" rel="stylesheet"/>
 <body>
     <section class="section">
         <div class="container">

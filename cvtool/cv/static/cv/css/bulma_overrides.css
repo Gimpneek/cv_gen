@@ -1,0 +1,21 @@
+.select[multiple]{
+    height: 100%;
+}
+.control.is-horizontal .control{
+    flex-flow: column;
+}
+.control.is-horizontal .control.tags > span{
+    flex-flow: row;
+}
+.control .tags .tag{
+    margin-bottom: 0.5em;
+}
+.control.is-horizontal .control.tags span.has-addons{
+    margin-top: 1em;
+}
+.control.is-horizontal .input, .control.is-horizontal .help{
+    flex: 1;
+}
+.tag{
+    margin-right: 10px;
+}
