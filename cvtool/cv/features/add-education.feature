@@ -21,6 +21,15 @@ Feature: Add education
       | the date I started the education         |
       | a course I took as part of the education |
 
+  Scenario: Validation errors on submit empty form
+    Given I create a new education
+    When I submit an empty form
+    Then I should see validation errors for the following fields:
+    | invalid_field                            |
+    | the name of the institution I studied at |
+    | the date I started the education         |
+    | a course I took as part of the education |
+
   Scenario: Add existing course for education
     When I create a new education
     Then I should be able to assign a course I took as part of the education

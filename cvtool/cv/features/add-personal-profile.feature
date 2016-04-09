@@ -31,3 +31,12 @@ Feature: Add personal profile
       | my name                       |
       | my email address              |
       | a paragraph that describes me |
+
+  Scenario: Validation errors on submit empty form
+    Given I create a new personal profile
+    When I submit an empty form
+    Then I should see validation errors for the following fields:
+    | invalid_field                 |
+    | my name                       |
+    | my email address              |
+    | a paragraph that describes me |

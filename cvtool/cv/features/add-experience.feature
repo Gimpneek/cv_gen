@@ -25,6 +25,15 @@ Feature: Add experience
       | the position I held in the job |
       | the date I started the job     |
 
+  Scenario: Validation errors on submit empty form
+    Given I create a new job
+    When I submit an empty form
+    Then I should see validation errors for the following fields:
+    | invalid_field                  |
+    | the company I worked for       |
+    | the position I held in the job |
+    | the date I started the job     |
+
   Scenario: Add existing responsibility for job
     When I create a new job
     Then I should be able to assign a responsibility I had in the job

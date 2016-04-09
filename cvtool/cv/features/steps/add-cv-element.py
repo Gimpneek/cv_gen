@@ -3,6 +3,7 @@ from behave import given, when, then
 from django.core.urlresolvers import reverse_lazy
 import selenium.webdriver.support.ui as ui
 import selenium.webdriver.support.expected_conditions as ec
+from selenium.webdriver.common.by import By
 import page_helpers
 
 
@@ -74,3 +75,24 @@ def add_minimal_data_submit(context):
             reverse_lazy('{0}_list'.format(element))
         )
     )
+
+
+@when('I submit an empty form')
+def submit_empty_form(context):
+    submit = context.browser.find_element(*page_helpers.FORM_SUBMIT_BUTTON)
+    submit.click()
+
+
+@then('I should see validation errors for the following fields')
+def check_validation_errors(context):
+    for row in context.table:
+        info = row.get('invalid_field')
+        field = page_helpers.ADD_DATA_ACTIONS.get(info)
+        if 'a course' in info:
+            field = page_helpers.MULTISELECT_DATA_ACTIONS.get(info)
+        key = field.get('key')
+        input_locator = (By.NAME, key)
+        help_locator = (By.CSS_SELECTOR, '.help')
+        input_el = context.browser.find_element(*input_locator)
+        help_el = input_el.parent.find_element(*help_locator)
+        assert(help_el.text, 'This field is required.')
