@@ -30,9 +30,9 @@ Feature: Add education
     | the date I started the education         |
     | a course I took as part of the education |
 
-  Scenario: Add existing course for education
-    When I create a new education
-    Then I should be able to assign a course I took as part of the education
+#  Scenario: Add existing course for education
+#    When I create a new education
+#    Then I should be able to assign a course I took as part of the education
 
 #  Scenario: Add new course for education
 #    When I add a new education
@@ -41,9 +41,9 @@ Feature: Add education
 #    Then I should be able to create the course
 #    And assign it to the education
 
-  Scenario: Add existing project for education
-    When I create a new education
-    Then I should be able to assign a project I did as part of my studies
+#  Scenario: Add existing project for education
+#    When I create a new education
+#    Then I should be able to assign a project I did as part of my studies
 
 #  Scenario: Add new project for education
 #    When I create a new education

@@ -34,9 +34,9 @@ Feature: Add experience
     | the position I held in the job |
     | the date I started the job     |
 
-  Scenario: Add existing responsibility for job
-    When I create a new job
-    Then I should be able to assign a responsibility I had in the job
+#  Scenario: Add existing responsibility for job
+#    When I create a new job
+#    Then I should be able to assign a responsibility I had in the job
 
 #  Scenario: Add new responsibility for job
 #    When I create a new job
@@ -45,9 +45,9 @@ Feature: Add experience
 #    Then I should be able to create the responsibility
 #    And assign it to the job
 
-  Scenario: Add existing project for job
-    When I create a new job
-    Then I should be able to assign a project I did at the job
+#  Scenario: Add existing project for job
+#    When I create a new job
+#    Then I should be able to assign a project I did at the job
 
 #  Scenario: Add new project for job
 #    When I create a new job
