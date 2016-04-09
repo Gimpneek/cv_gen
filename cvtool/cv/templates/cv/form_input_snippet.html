@@ -7,7 +7,7 @@
             <div class="control-label">
                 <label class="label" for="{{ field.id_for_label}}">{{ field.help_text }}</label>
             </div>
-            <p class="control {% if field.errors %} has-icon has-icon-right {% endif %}">
+            <p class="control {% if field|fieldtype == 'SelectMultiple' %}tags{% endif %} {% if field.errors %}has-icon has-icon-right{% endif %}">
                 {% if field|fieldtype == 'TextInput' %}
                     <input name="{{ field.html_name }}" class="input {% if field.errors %} is-danger {% endif %}" type="text" value="{{ field.value }}"/>
                 {% endif %}
@@ -38,11 +38,25 @@
                     </span>
                 {% endif %}
                 {% if field|fieldtype  == 'SelectMultiple' %}
-                    <select multiple="multiple" name="{{ field.html_name }}" class="select is-fullwidth">
+                    <span>
+                        {% for id, name in field.field.choices %}
+                            {% if id in field.value %}
+                                <span class="tag is-info is-large" data-id="{{ id }}">{{name }} <button class="delete"></button></span>
+                                <input type="hidden" name="{{ field.html_name }}" value="{{ id }}"/>
+                            {% endif %}
+                        {% endfor %}
+                    </span>
+                    <span class="control has-addons">
+                      <input class="input" type="text" placeholder="Find a repository">
+                      <a class="button is-info">
+                        Search
+                      </a>
+                    </span>
+                    <!-- <select multiple="multiple" name="{{ field.html_name }}" class="select is-fullwidth">
                         {% for id, name in field.field.choices %}
                             <option value="{{ id }}" {% if id in field.value %} selected="selected" {% endif %}>{{ name }}</option>
                         {% endfor %}
-                    </select>
+                    </select> -->
                 {% endif %}
                 {% if field.errors %}
                     <i class="fa fa-warning"></i>
