@@ -11,6 +11,8 @@ import page_helpers
 def go_to_add_profile(context, element):
     if element == 'personal profile':
         element = 'profile'
+    elif element == 'job':
+        element = 'experience'
     context.element_section = element
     context.browser.get(
         context.base_url + str(reverse_lazy('{0}-new'.format(element))))
@@ -34,13 +36,29 @@ def select_data_in_form(context, action):
     assert (selected_data == data)
 
 
+@then('I should be able to assign {action}')
+def select_multi_in_form(context, action):
+    action_data = page_helpers.MULTISELECT_DATA_ACTIONS.get(action)
+    key = action_data.get('key')
+    data = action_data.get('data')
+    selected_data = page_helpers.select_multi(context, key, data)
+    for item in data:
+        assert(item in selected_data)
+
+
 @then('I should be able to submit the form by only adding')
 def add_minimal_data_submit(context):
     for row in context.table:
-        action_data = page_helpers.ADD_DATA_ACTIONS.get(row.get('information'))
+        info = row.get('information')
+        action_data = page_helpers.ADD_DATA_ACTIONS.get(info)
+        if 'a course' in info:
+            action_data = page_helpers.MULTISELECT_DATA_ACTIONS.get(info)
         key = action_data.get('key')
         data = action_data.get('data')
-        page_helpers.insert_data(context, key, data)
+        if 'a course' in info:
+            page_helpers.select_multi(context, key, data)
+        else:
+            page_helpers.insert_data(context, key, data)
     submit = context.browser.find_element(*page_helpers.FORM_SUBMIT_BUTTON)
     submit.click()
     ui.WebDriverWait(context.browser, 5).until(

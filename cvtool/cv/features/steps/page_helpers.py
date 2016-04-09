@@ -35,6 +35,34 @@ ADD_DATA_ACTIONS = {
     'a name for the skill': {
         'key': 'name',
         'data': 'Test skill'
+    },
+    'the company I worked for': {
+        'key': 'company',
+        'data': 'Test Corp'
+    },
+    'the position I held in the job': {
+        'key': 'role',
+        'data': 'Senior Test Executor'
+    },
+    'the date I started the job': {
+        'key': 'start_date',
+        'data': '2013-11-05'
+    },
+    'the date I ended the job if applicable': {
+        'key': 'end_date',
+        'data': '2016-03-08'
+    },
+    'the name of the institution I studied at': {
+        'key': 'institution',
+        'data': 'Test University'
+    },
+    'the date I started the education': {
+        'key': 'start_date',
+        'data': '2006-09-01'
+    },
+    'the date I finished the education': {
+        'key': 'end_date',
+        'data': '2009-06-01'
     }
 }
 SELECT_DATA_ACTIONS = {
@@ -45,6 +73,28 @@ SELECT_DATA_ACTIONS = {
     'if the skill is current practice or not': {
         'key': 'freshness',
         'data': 'Not Current Practice'
+    }
+}
+MULTISELECT_DATA_ACTIONS = {
+    'a tag to the skill': {
+        'key': 'tags',
+        'data': ['TDD', 'Quality']
+    },
+    'a responsibility I had in the job': {
+        'key': 'responsibilities',
+        'data': ['Running tests']
+    },
+    'a project I did at the job': {
+        'key': 'projects',
+        'data': ['Living Documentation']
+    },
+    'a course I took as part of the education': {
+        'key': 'courses',
+        'data': ['BA (Hons) Digital Arts']
+    },
+    'a project I did as part of my studies': {
+        'key': 'projects',
+        'data': ['Augmented Reality']
     }
 }
 
@@ -62,3 +112,12 @@ def select_data(context, key, data):
     select = Select(input_el)
     select.select_by_visible_text(data)
     return select.first_selected_option.text
+
+
+def select_multi(context, key, data):
+    input_selector = (By.NAME, key)
+    input_el = context.browser.find_element(*input_selector)
+    select = Select(input_el)
+    for item in data:
+        select.select_by_visible_text(item)
+    return [opt.text for opt in select.all_selected_options]

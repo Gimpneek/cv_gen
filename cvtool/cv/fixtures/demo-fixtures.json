@@ -48,6 +48,28 @@
 		"name": "Public Sector"
 	}
 }, {
+	"model": "cv.responsibility",
+	"pk": 1,
+	"fields": {
+		"name": "Running tests"
+	}
+},
+	{
+		"model": "cv.project",
+		"pk": 1,
+		"fields": {
+			"name": "Living Documentation"
+		}
+	},
+	{
+		"model": "cv.project",
+		"pk": 2,
+		"fields": {
+			"name": "Augmented Reality"
+		}
+	},
+
+	{
 	"model": "cv.experience",
 	"pk": 1,
 	"fields": {
@@ -55,8 +77,8 @@
 		"role": "Software Development Manager",
 		"start_date": "2013-11-05",
 		"end_date": null,
-		"projects": [],
-		"responsibilities": []
+		"projects": [1],
+		"responsibilities": [1]
 	}
 }, {
 	"model": "cv.course",
@@ -73,7 +95,7 @@
 		"start_date": "2006-08-01",
 		"end_date": "2009-06-01",
 		"courses": [1],
-		"projects": []
+		"projects": [2]
 	}
 }, {
 	"model": "cv.personalprofile",
